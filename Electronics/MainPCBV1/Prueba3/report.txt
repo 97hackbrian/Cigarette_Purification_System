@@ -1,0 +1,4 @@
+Plotted to '/home/hackbrian/Documentos/Cigarette_Purification_System-PCB/MainPCBV1/Prueba3/MainPCBV1-F_Cu.gtl'.
+Plotted to '/home/hackbrian/Documentos/Cigarette_Purification_System-PCB/MainPCBV1/Prueba3/MainPCBV1-B_Cu.gbl'.
+Created Gerber job file '/home/hackbrian/Documentos/Cigarette_Purification_System-PCB/MainPCBV1/Prueba3/MainPCBV1-job.gbrjob'.
+Info: Done.

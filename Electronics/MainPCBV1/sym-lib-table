@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name "Seeeduino XIAO")(type "Legacy")(uri "${KIPRJMOD}/Seeeduino XIAO KICAD/Seeeduino XIAO.lib")(options "")(descr ""))
+  (lib (name "AOD4184A")(type "KiCad")(uri "${KIPRJMOD}/AOD4184A/AOD4184A.kicad_sym")(options "")(descr ""))
+  (lib (name "Switch")(type "Legacy")(uri "${KIPRJMOD}/switchLib/Switch.lib")(options "")(descr ""))
+)
