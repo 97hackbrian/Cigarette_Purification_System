@@ -1,0 +1,102 @@
+/***************************************************
+ DFRobot Gravity: HCHO Sensor
+ <https://www.dfrobot.com/wiki/index.php/Gravity:_HCHO_Sensor_SKU:_SEN0231>
+ 
+ ***************************************************
+ This example reads the concentration of HCHO in air by UART mode.
+ 
+ Created 2016-12-15
+ By Jason <jason.ling@dfrobot.com@dfrobot.com>
+ 
+ GNU Lesser General Public License.
+ See <http://www.gnu.org/licenses/> for details.
+ All above must be included in any redistribution
+ ****************************************************/
+ 
+ /***********Notice and Trouble shooting***************
+ 1. This code is tested on Arduino Uno with Arduino IDE 1.0.5 r2.
+ 2. In order to protect the sensor, do not touch the white sensor film on the sensor module, 
+ and high concentration of Hydrogen sulfide, hydrogen, methanol, ethanol, carbon monoxide should be avoided. 
+ 3. Please do not use the modules in systems which related to human being’s safety.
+ ****************************************************/
+
+#include <DFRobotHCHOSensor.h>
+#include <SoftwareSerial.h>
+
+#define SensorSerialPin	7	//this pin read the uart signal from the HCHO sensor
+
+#define Mosfet1 4
+#define Mosfet2 5
+#define ledR 2
+#define ledG 1
+#define boton 3
+bool val=0;
+bool var=0;
+float air=0;
+SoftwareSerial sensorSerial(SensorSerialPin,SensorSerialPin);
+
+DFRobotHCHOSensor hchoSensor(&sensorSerial);
+
+void setup()
+{  
+    sensorSerial.begin(9600);	//the baudrate of HCHO is 9600
+    sensorSerial.listen();
+    pinMode(Mosfet1,OUTPUT);
+    pinMode(Mosfet2,OUTPUT);
+    pinMode(ledR,OUTPUT);
+    pinMode(ledG,OUTPUT);
+
+    pinMode(boton,INPUT);
+    Serial.begin(9600);
+}
+
+void loop()
+{
+   val=digitalRead(boton);
+   if(val==1){
+    while(true){
+      
+    
+   val=digitalRead(boton);
+   if(val==0 && var==0){
+    var=1;
+    break;
+   }
+   else if(val==0 && var==1){
+    var=0;
+    break;
+   }
+   }
+   }
+    
+    if(hchoSensor.available()>0 && var==0)	
+    {
+      digitalWrite(LED_BUILTIN, 0);   
+      air=hchoSensor.uartReadPPM();
+      if(air>=0.36){
+        digitalWrite(ledR,HIGH);
+        digitalWrite(ledG,HIGH);
+        digitalWrite(Mosfet1, 1);   
+        digitalWrite(Mosfet2, 1);   
+      }
+      else{
+        digitalWrite(ledR,HIGH);
+        digitalWrite(ledG,LOW);
+        digitalWrite(Mosfet1, 0);   
+        digitalWrite(Mosfet2, 0);
+      }
+      Serial.println(air);
+      Serial.println("ppm");
+    }
+    else if(var==1){
+      digitalWrite(Mosfet1, 1);   
+      digitalWrite(Mosfet2, 1);
+      digitalWrite(ledR,LOW);
+      digitalWrite(ledG,HIGH);
+    }
+    else{
+      digitalWrite(LED_BUILTIN, 1);    
+    }
+
+    
+}
