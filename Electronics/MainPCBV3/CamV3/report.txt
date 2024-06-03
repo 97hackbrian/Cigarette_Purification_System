@@ -1,0 +1,3 @@
+Trazado a '/home/hackbrian/Documentos/gitProyects/Cigarette_Purification_System/Electronics/MainPCBV3/CamV3/MainPCBV3-F_Cu.gbr'.
+Trazado a '/home/hackbrian/Documentos/gitProyects/Cigarette_Purification_System/Electronics/MainPCBV3/CamV3/MainPCBV3-B_Cu.gbr'.
+Info: Listo.

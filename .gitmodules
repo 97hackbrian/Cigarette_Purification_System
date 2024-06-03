@@ -1,0 +1,3 @@
+[submodule "Codes/library"]
+	path = Codes/library
+	url = https://github.com/DFRobot/DFRobotHCHOSensor.git
